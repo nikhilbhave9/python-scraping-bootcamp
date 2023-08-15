@@ -1,6 +1,7 @@
 from datetime import datetime
 import re
 from selectolax.parser import Node
+import pandas as pd
 
 def get_attrs_from_node(node: Node, attr: str):
     if node is None or not issubclass(Node, type(node)):
@@ -45,3 +46,11 @@ def format_dict(attrs: dict):
             attrs[k] = v(attrs[k])
 
     return attrs
+
+def save_to_disk(filename="extract", data: list[dict] = None):
+    if data is None:
+        raise ValueError("ERROR")
+    
+    df = pd.DataFrame(data)
+    filename = f"{datetime.now().strftime('%Y_%m_%d')}_{filename}.csv"
+    df.to_csv(filename, index=False)

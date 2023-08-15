@@ -1,6 +1,6 @@
 from utils.extract import extract_full_body_html
 from utils.parse import parse_raw_attributes
-from utils.process import format_dict
+from utils.process import format_dict, save_to_disk
 from config.tools import get_config
 from selectolax.parser import HTMLParser
 
@@ -39,7 +39,7 @@ if __name__ == "__main__":
         # ------------------------------------------------------------
 
         game_attrs_transformed = format_dict(game_attrs)
-        print(game_attrs_transformed)
+        list_of_games.append(game_attrs_transformed)
 
         # ------------------------------------------------------------
 
@@ -88,5 +88,6 @@ if __name__ == "__main__":
         #     'new_price': None
         # }
 
+    save_to_disk("extract", list_of_games)
 
 
